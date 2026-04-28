@@ -48,7 +48,8 @@
       // lister from server
       socket.on("server-recieve-msg", (data) => {
         const li = document.createElement("li");
-        li.textContent = `${data.username} : ${data.message}`;
+        const name = data.username === username ? "You" : data.username;
+        li.textContent = `${name} : ${data.message}`;
         container.appendChild(li);
       });
 

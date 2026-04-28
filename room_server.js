@@ -28,7 +28,7 @@ io.on("connection", (socket) => {
 
   // msg to room
   socket.on("client-send-msg", ({ roomId, message }) => {
-    socket.to(roomId).emit("server-recieve-msg", {
+    io.to(roomId).emit("server-recieve-msg", {
       message,
       username: socket.data.username,
     });
