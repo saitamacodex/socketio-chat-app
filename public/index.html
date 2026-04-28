@@ -9,7 +9,7 @@
     <h1>Chat Room <span id="room-id"></span></h1>
 
     <input id="username" placeholder="Enter username" />
-    <input id="room" placeholder="Enter room no: 1 to 10" type="number" />
+    <input id="room" placeholder="Enter room no" type="number" />
     <button id="join">Join</button>
     <br /><br />
 
@@ -44,6 +44,7 @@
         // once joined the room diable or clear the field
         usernameInput.disabled = true;
         roomInput.disabled = true;
+        joinBtn.disabled = true;
 
         // update UI
         document.getElementById("room-id").textContent =
