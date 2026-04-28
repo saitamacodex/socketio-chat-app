@@ -101,7 +101,7 @@ A real-time chat application built using **Node.js, Express, and Socket.IO** tha
 1. Install dependencies:
 
    ```bash
-   npm install
+   pnpm install
    ```
 
 2. Start the server:
@@ -155,7 +155,7 @@ Open multiple tabs with same room ID to simulate multiple users chatting in real
 
 UI is not that great 😀
 
-<img width="1508" height="892" alt="image" src="https://github.com/user-attachments/assets/831a0119-8dd1-4ea1-a9c6-9e6637986446" />
+<img width="1191" height="856" alt="image" src="https://github.com/user-attachments/assets/b07ab38e-a705-4cae-8387-95eb28c3c2d3" />
 
 ---
 
