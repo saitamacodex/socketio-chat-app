@@ -8,7 +8,12 @@
   <body>
     <h1>Chat Room <span id="room-id"></span></h1>
 
-    <label>EnterMessage:</label>
+    <input id="username" placeholder="Enter username" />
+    <input id="room" placeholder="Enter room no: 1 to 10" type="number" />
+    <button id="join">Join</button>
+    <br /><br />
+
+    <label>Enter Your Message:</label>
     <input type="text" id="msg" placeholder="Enter message" />
     <button id="btn">Send</button>
 
@@ -19,23 +24,40 @@
     <script>
       const socket = io();
       const container = document.getElementById("container");
-      const btn = document.getElementById("btn");
+      const sendBtn = document.getElementById("btn");
       const msg = document.getElementById("msg");
 
-      // get the room id from the user
-      const username = prompt("Enter your firstname; ");
-      const roomId = prompt("Enter room id: ");
+      const usernameInput = document.getElementById("username");
+      const roomInput = document.getElementById("room");
+      const joinBtn = document.getElementById("join");
 
-      if (!username || !roomId) {
-        alert("Username and room id are required");
-      }
-      // update UI
-      document.getElementById("room-id").textContent = roomId + " " + username;
+      let username = "";
+      let roomId = "";
+      joinBtn.addEventListener("click", function (event) {
+        username = usernameInput.value.trim();
+        roomId = roomInput.value.trim();
 
-      // send room id to server
-      socket.emit("join-room", { roomId, username });
+        if (!username || !roomId) {
+          alert("Uername and room id are required.");
+          return;
+        }
+        // once joined the room diable or clear the field
+        usernameInput.disabled = true;
+        roomInput.disabled = true;
+
+        // update UI
+        document.getElementById("room-id").textContent =
+          roomId + " " + username;
+
+        // send room id / username to server
+        socket.emit("join-room", { roomId, username });
+      });
 
       function sendMessage() {
+        if (!username || !roomId) {
+          alert("Please join a room first");
+          return;
+        }
         if (msg.value) {
           socket.emit("client-send-msg", {
             roomId,
@@ -45,7 +67,7 @@
         msg.value = "";
       }
 
-      // lister from server
+      // get message from server
       socket.on("server-recieve-msg", (data) => {
         const li = document.createElement("li");
         const name = data.username === username ? "You" : data.username;
@@ -53,7 +75,8 @@
         container.appendChild(li);
       });
 
-      btn.addEventListener("click", function (e) {
+      // send msg btn
+      sendBtn.addEventListener("click", function (e) {
         sendMessage();
       });
     </script>

@@ -26,7 +26,7 @@ io.on("connection", (socket) => {
     console.log(`User: ${username} joined room: ${roomId}`);
   });
 
-  // msg to room
+  // send msg to room
   socket.on("client-send-msg", ({ roomId, message }) => {
     io.to(roomId).emit("server-recieve-msg", {
       message,
