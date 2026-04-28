@@ -25,10 +25,15 @@
       // get the room id from the user
       const username = prompt("Enter your firstname; ");
       const roomId = prompt("Enter room id: ");
+
+      if (!username || !roomId) {
+        alert("Username and room id are required");
+      }
+      // update UI
       document.getElementById("room-id").textContent = roomId + " " + username;
 
       // send room id to server
-      socket.emit("join-room", roomId);
+      socket.emit("join-room", { roomId, username });
 
       function sendMessage() {
         if (msg.value) {
@@ -43,7 +48,7 @@
       // lister from server
       socket.on("server-recieve-msg", (data) => {
         const li = document.createElement("li");
-        li.textContent = `${data.sender} : ${data.message}`;
+        li.textContent = `${data.username} : ${data.message}`;
         container.appendChild(li);
       });
 

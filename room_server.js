@@ -19,16 +19,18 @@ io.on("connection", (socket) => {
   console.log("A user connected", socket.id);
 
   // join room
-  socket.on("join-room", (roomId) => {
+  socket.on("join-room", ({ roomId, username }) => {
     socket.join(roomId);
-    console.log(`User: ${socket.id} joined room: ${roomId}`);
+    // store username in socket
+    socket.data.username = username;
+    console.log(`User: ${username} joined room: ${roomId}`);
   });
 
   // msg to room
   socket.on("client-send-msg", ({ roomId, message }) => {
     socket.to(roomId).emit("server-recieve-msg", {
       message,
-      sender: socket.id,
+      username: socket.data.username,
     });
   });
 });
