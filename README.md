@@ -153,6 +153,10 @@ A real-time chat application built using **Node.js, Express, and Socket.IO** tha
 
 Open multiple tabs with same room ID to simulate multiple users chatting in real time.
 
+UI is not that great 😀
+
+<img width="1508" height="892" alt="image" src="https://github.com/user-attachments/assets/831a0119-8dd1-4ea1-a9c6-9e6637986446" />
+
 ---
 
 ## 🤝 Contribution
